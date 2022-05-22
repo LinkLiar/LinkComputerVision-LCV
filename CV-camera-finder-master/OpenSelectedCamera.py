@@ -1,6 +1,6 @@
 # Setting CameraIp
 import imp
-from pymf import get_MF_devices
+from pymf import GetDevices
 import cv2
 import json
 import threading
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     fileUrl = 'cameraSetting.json'
     jsonData = {}
     ipList = []
-    device_list = get_MF_devices()
+    device_list = GetDevices()
     g_thread_exit_flag = False
     for i in range(len(device_list)):
         ipList.append(str(201+i))

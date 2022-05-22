@@ -17,8 +17,8 @@ Tested Env: windows10, python3.9.6
 
 simple example
 ``` python
-from pymf import get_MF_devices
-device_list = get_MF_devices()
+from pymf import GetDevices
+device_list = GetDevices()
 for i, device_name in enumerate(device_list):
     print(f"opencv_index: {i}, device_name: {device_name}")
 
@@ -27,10 +27,10 @@ for i, device_name in enumerate(device_list):
 
 simple example with opencv
 ``` python
-from pymf import get_MF_devices
+from pymf import GetDevices
 import cv2
 
-device_list = get_MF_devices()
+device_list = GetDevices()
 cv_index = None
 for i, device_name in enumerate(device_list):
     # find index of camera you want

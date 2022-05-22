@@ -1,4 +1,7 @@
-from pymf import get_MF_devices
-device_list = get_MF_devices()
+from CameraFinder import GetDevices
+import os
+device_list = GetDevices()
+print("OpenCV Index List:")
 for i, device_name in enumerate(device_list):
-    print(f"opencv_index: {i}, device_name: {device_name}")
+    print(f"{i}: Device Name: {device_name}")
+os.system("pause")

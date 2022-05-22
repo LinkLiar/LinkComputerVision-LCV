@@ -1,15 +1,17 @@
+__author__ = 'Lika'
+
 from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 from Cython.Build import cythonize
 
 
-sourcefiles = ['pymf.cpp', 'cap.cpp']
+sourcefiles = ['CameraFinder.cpp', 'cap.cpp']
 
 ext_modules = [
-    # cythonize("pymf.cpp")
+    # cythonize("CameraFinder.cpp")
     # V2 Beta
-    Extension("pymf", sourcefiles,
+    Extension("CameraFinder", sourcefiles,
               include_dirs=["capture"],
               # error LNK2001: unresolved external symbol __imp_CoTaskMemFree
               libraries=["ole32"],
