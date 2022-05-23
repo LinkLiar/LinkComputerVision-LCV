@@ -2,7 +2,7 @@
 #include <vector>
 #include <mfplay.h>
 #include <python.h>
-#include "capture/capture.h"
+#include "capture.h"
 
 using namespace std;
 
