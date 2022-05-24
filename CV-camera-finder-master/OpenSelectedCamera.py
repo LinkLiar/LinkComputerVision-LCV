@@ -1,12 +1,13 @@
 # Setting CameraIp
 import imp
-from pymf import GetDevices
+from CameraFinder import GetDevices
 import cv2
 import json
 import threading
 
+
 class CaptureThread(threading.Thread):
-    def __init__(self,id,name):
+    def __init__(self, id, name):
         threading.Thread.__init__(self)
         self.id = id
         self.name = name
@@ -26,24 +27,27 @@ class CaptureThread(threading.Thread):
                     break
 
             if (g_thread_exit_flag):
-                break 
+                break
 
         # Release the VideoCapture object.
         video.release()
 
-def SelectIpList(cameraName,ipList):
+
+def SelectIpList(cameraName, ipList):
     index = 0
-    print('Please choose the ip:',cameraName)
+    print('Please choose the ip:', cameraName)
     for ip in ipList:
-        print('{}:{}'.format(index,ip))
-        index=index+1
+        print('{}:{}'.format(index, ip))
+        index = index+1
 
     try:
-        selectIndex = int((input('choose the number(default is 0):'.format(len(ipList) - 1))))
+        selectIndex = int(
+            (input('choose the number(default is 0):'.format(len(ipList) - 1))))
     except:
         selectIndex = 0
 
     return selectIndex
+
 
 if __name__ == '__main__':
     fileUrl = 'cameraSetting.json'
@@ -56,13 +60,13 @@ if __name__ == '__main__':
 
     for cv_index, device_name in enumerate(device_list):
         g_thread_exit_flag = False
-        cap = CaptureThread(cv_index, device_name) 
+        cap = CaptureThread(cv_index, device_name)
         cap.start()
 
         selectIndex = SelectIpList(device_name, ipList)
 
         while (selectIndex < 0 or selectIndex >= len(ipList)):
-            selectIndex = SelectIpList(device_name,ipList)
+            selectIndex = SelectIpList(device_name, ipList)
 
         jsonData[ipList[selectIndex]] = cv_index
         ipList.remove(ipList[selectIndex])
@@ -72,5 +76,5 @@ if __name__ == '__main__':
     with open(fileUrl, 'w') as f:
         print('write to {}-->'.format(fileUrl), jsonData)
         json.dump(jsonData, f)
-        
+
     cv2.destroyAllWindows()
