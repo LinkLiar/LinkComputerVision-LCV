@@ -1,10 +1,7 @@
-# Setting CameraIp
-import imp
 from CameraFinder import GetDevices
 import cv2
 import json
 import threading
-
 
 class CaptureThread(threading.Thread):
     def __init__(self, id, name):
@@ -39,13 +36,11 @@ def SelectIpList(cameraName, ipList):
     for ip in ipList:
         print('{}:{}'.format(index, ip))
         index = index+1
-
     try:
         selectIndex = int(
             (input('choose the number(default is 0):'.format(len(ipList) - 1))))
     except:
         selectIndex = 0
-
     return selectIndex
 
 
@@ -72,9 +67,5 @@ if __name__ == '__main__':
         ipList.remove(ipList[selectIndex])
         g_thread_exit_flag = True
         cap.join()
-
-    with open(fileUrl, 'w') as f:
-        print('write to {}-->'.format(fileUrl), jsonData)
-        json.dump(jsonData, f)
 
     cv2.destroyAllWindows()
